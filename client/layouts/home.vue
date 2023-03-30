@@ -1,9 +1,10 @@
 <template>
-  <main class="py-20 px-10 text-center">
+  <main>
     <slot />
+    <NavBar />
     <Footer />
-    <div class="mt-5 mx-auto text-center opacity-25 text-sm">
-      [Home Layout]
+    <div>
+      [Home Layout]1212
     </div>
   </main>
 </template>

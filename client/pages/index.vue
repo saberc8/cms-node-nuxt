@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<InputEntry />
+    <NavBar></NavBar>
 		<el-button>Default</el-button>
 		<el-button type="primary">Primary</el-button>
 		<el-button type="success">Success</el-button>
