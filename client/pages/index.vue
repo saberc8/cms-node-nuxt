@@ -1,22 +1,16 @@
-<script setup lang="ts">
-const online = useOnline()
-</script>
-
 <template>
   <div>
-    <Suspense>
-      <ClientOnly>
-        <PageView v-if="online" />
-        <div v-else>
-          You're offline
-        </div>
-      </ClientOnly>
-      <template #fallback>
-        <div>
-          <span>Loading...</span>
-        </div>
-      </template>
-    </Suspense>
     <InputEntry />
+    {{ data }}
   </div>
 </template>
+
+<script setup lang="ts">
+const data = await $fetch('/api/api/user/login', {
+  method: 'POST',
+  body: JSON.stringify({
+    username: 'admin',
+    password: '123456',
+  }),
+})
+</script>
