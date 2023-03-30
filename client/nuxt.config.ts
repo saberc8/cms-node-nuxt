@@ -48,4 +48,8 @@ export default defineNuxtConfig({
     },
   },
   pwa,
+  devServer: {
+    https: false,
+    port: 2224,
+  },
 })
