@@ -1,0 +1,131 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+a {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+	color: #757575;
+	background-color: #fff;
+}
+a {
+	color: #333;
+	text-decoration: none;
+}
+a:hover {
+	color: var(--theme-color);
+}
+b,
+em,
+i {
+	font-weight: normal;
+	font-style: normal;
+}
+img {
+	vertical-align: middle;
+	border-style: none;
+}
+.clearfix {
+	zoom: 1;
+}
+.clearfix:after {
+	content: '.';
+	height: 0;
+	visibility: hidden;
+	display: block;
+	clear: both;
+}
+ol,
+ul {
+	list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-top: 0;
+	margin-bottom: 0.5em;
+	color: rgba(0, 0, 0, 0.85);
+	font-weight: 500;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+svg {
+	display: inline-block;
+}
+::-webkit-input-placeholder {
+	/* WebKit browsers */
+	color: $disabled;
+	font-size: 1rem;
+}
+:-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	color: $disabled;
+	font-size: 1rem;
+}
+::-moz-placeholder {
+	/* Mozilla Firefox 19+ */
+	color: $disabled;
+	font-size: 1rem;
+}
+:-ms-input-placeholder {
+	/* Internet Explorer 10+ */
+	color: $disabled;
+	font-size: 1rem;
+}
+::-webkit-scrollbar {
+	width: 0.5rem;
+	height: 0.5rem;
+	background: hsla(0, 0%, 100%, 0.6);
+}
+::-webkit-scrollbar-track {
+	border-radius: 0;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 0;
+	background-color: rgba(95, 95, 95, 0.4);
+	transition: all 0.2s;
+	border-radius: 0.5rem;
+	&:hover {
+		background-color: rgba(95, 95, 95, 0.7);
+	}
+}
+[hidden],
+[none],
+.hidden,
+.none {
+	display: none !important;
+}
+#nprogress .bar {
+	height: 2.5px !important; //进度条高度
+	background: rgba(255, 0, 0, 0.66) !important; //自定义颜色
+}
+:root {
+	--el-color-primary: #42b883;
+}
+.rotate-svg {
+	color: var(--el-color-primary);
+	svg,
+	img {
+		position: relative;
+		top: -2px;
+		transition: all 0.6s;
+	}
+	&:hover {
+		color: var(--theme-orange);
+		svg,
+		img {
+			transform: rotate(-360deg);
+		}
+	}
+}

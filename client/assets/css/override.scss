@@ -1,0 +1,21 @@
+// 覆盖ui lib样式
+.el-button.el-button--primary:focus,
+.el-button.el-button--primary:hover {
+	color: #fff;
+	border-color: #52c990;
+	background-color: #52c990;
+	transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+body {
+	.markdown-body pre {
+		padding: 0;
+		margin: 1em 0;
+	}
+}
+.markdown-body {
+	outline: none;
+}
+.markdown-body ol,
+.markdown-body ul {
+	list-style-type: disc;
+}

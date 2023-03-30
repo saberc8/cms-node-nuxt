@@ -1,0 +1,168 @@
+@media (max-width: 1200px) {
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+}
+@media (max-width: 1000px) {
+}
+@media (max-width: 992px) {
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 650px) {
+}
+@media (max-width: 375px) {
+}
+/* Media Queries - Small Tablet (from 480px to 799px)*/
+@media screen and (min-width: 480px) and (max-width: 799px) {
+}
+/* Media Queries - Desktop up from 800px */
+@media screen and (min-width: 0px) and (max-width: 479px) {
+	html {
+		.VPNavBar {
+			padding: 0;
+			.content {
+				justify-content: center;
+			}
+			.app-header-main {
+				display: block;
+				text-align: center;
+			}
+			.VPNavBarMenu {
+				margin-right: 0;
+				flex-flow: wrap;
+			}
+		}
+	}
+	.app-admin-body {
+		margin-bottom: 20px;
+		.el-card {
+			border-bottom: none;
+		}
+	}
+	.app-home-body {
+		.app-admins-col {
+			margin-bottom: 20px;
+		}
+	}
+	.VPNavBarTitle {
+		display: block;
+		width: 100%;
+		min-width: 100%;
+		text-align: center;
+	}
+	.VPNavBar {
+		.VPNavBarMenuLink {
+			line-height: 30px;
+			padding-bottom: 10px;
+		}
+	}
+	.publish-version {
+		.el-radio-button__inner {
+			padding: 7px 8px;
+		}
+	}
+	.app-page-search {
+		padding-left: 0.4rem;
+		.article-tags {
+			display: block;
+			.el-radio-button {
+				margin-bottom: 0.8rem;
+			}
+		}
+		.el-form-item {
+			padding: 1rem 0 0 1.2rem;
+		}
+		.search-title {
+			position: static;
+			padding: 0 0 0.8rem 0;
+		}
+		.el-input {
+			width: 15rem;
+		}
+	}
+	.el-pagination__jump {
+		display: none;
+	}
+	.el-pagination {
+		.el-pager {
+			flex-wrap: wrap;
+			justify-content: flex-start;
+		}
+	}
+	.app-footer {
+		.nav {
+			display: inline-block;
+		}
+		.container {
+			display: block;
+			text-align: center;
+			line-height: 40px;
+		}
+		.app-footer-logo,
+		.domain {
+			display: none;
+		}
+		.copyright {
+			padding: 0.5rem 0 1rem 0;
+		}
+	}
+	.app-version-radio {
+		margin-top: 0.8rem;
+	}
+	.app-share-bar {
+		display: none;
+	}
+	.app-page-detail {
+		.el-container {
+			display: block;
+			.el-main {
+				padding: 10px 0 0 0;
+			}
+		}
+		.app-detail-header {
+			margin-bottom: 0.5rem;
+		}
+		.el-aside {
+			width: 100%;
+			margin-left: 0;
+			padding: 0.5rem 0;
+		}
+	}
+	.VPNavBar {
+		.title {
+			justify-content: center;
+		}
+	}
+	.app-page-about {
+		.app-about-body {
+			display: block;
+			padding-top: 0;
+			.img {
+				padding: 2rem 0;
+				margin-right: 0;
+				text-align: center;
+			}
+			.about-main {
+				margin-left: 0;
+			}
+		}
+	}
+	.app-home-hero {
+		.container {
+			display: block;
+			text-align: center;
+			.main {
+				width: 100%;
+			}
+		}
+		.actions {
+			display: block;
+		}
+	}
+	.app-page-banner {
+		height: 160px !important;
+	}
+	.contribute {
+		display: none;
+	}
+}

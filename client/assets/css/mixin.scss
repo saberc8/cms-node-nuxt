@@ -1,0 +1,60 @@
+//定位上下左右居中
+@mixin center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+//定位左右居中
+@mixin center-x {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+// 尺寸
+@mixin size($w, $h) {
+	width: $w;
+	height: $h;
+}
+
+//修改input placeholder颜色
+@mixin placeholderColor($color: #fff) {
+	&::-webkit-input-placeholder {
+		color: $color;
+	}
+	&::-moz-placeholder {
+		/* Mozilla Firefox 19+ */
+		color: $color;
+	}
+	&:-moz-placeholder {
+		/* Mozilla Firefox 4 to 18 */
+		color: $color;
+	}
+	&:-ms-input-placeholder {
+		/* Internet Explorer 10-11 */
+		color: $color;
+	}
+}
+
+//多行文字超出显示省略号
+@mixin ellipsisNum($number: 1) {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: $number;
+}
+
+//文字一行超出显示省略号
+@mixin ellipsis($substract: 0) {
+	//`$substract`单位为%
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: $substract;
+	display: inline-block;
+	vertical-align: middle;
+}

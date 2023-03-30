@@ -9,7 +9,8 @@ export default defineNuxtConfig({
 		payloadExtraction: false,
 		inlineSSRStyles: false,
 	},
-	css: [],
+	plugins: ['@/plugins/element-plus'],
+  css: ['@/assets/css/index.scss'],
 	colorMode: {
 		classSuffix: '',
 	},
@@ -24,7 +25,7 @@ export default defineNuxtConfig({
 			routes: ['/'],
 			ignore: ['/hi'],
 		},
-    devProxy: {
+		devProxy: {
 			'/api': {
 				target: 'http://localhost:2223', // 这里是接口地址
 				changeOrigin: true,
@@ -52,4 +53,13 @@ export default defineNuxtConfig({
 		https: false,
 		port: 2224,
 	},
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "@/assets/css/variable.scss";@import "@/assets/css/mixin.scss";',
+        },
+      },
+    },
+  },
 })
