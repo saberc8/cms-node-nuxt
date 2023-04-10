@@ -1,6 +1,7 @@
 <template>
 	<div>
     <NavBar></NavBar>
+		<!-- <ThreeDemo1></ThreeDemo1> -->
 		<el-button>Default</el-button>
 		<el-button type="primary">Primary</el-button>
 		<el-button type="success">Success</el-button>
