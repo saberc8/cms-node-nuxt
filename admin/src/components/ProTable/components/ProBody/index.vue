@@ -6,14 +6,12 @@
       </template>
 
       <template #toolbar_tools>
-        <slot name="toolbar_buttons"></slot>
-        <a-tooltip>
-          <template #title>刷新</template>
-          <redo-outlined
-            :style="{ cursor: 'pointer', 'margin-left': '15px' }"
-            @click="reloadData"
-          />
-        </a-tooltip>
+        <el-space>
+          <slot name="toolbar_buttons"></slot>
+          <el-tooltip content="刷新" placement="top">
+            <el-icon @click="reloadData"><RefreshRight /></el-icon>
+          </el-tooltip>
+        </el-space>
       </template>
 
       <template #pager>
@@ -39,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { RedoOutlined } from '@ant-design/icons-vue'
+  import { RefreshRight } from '@element-plus/icons-vue'
   import { VxeGridInstance, VxeGridProps, VxePagerEvents } from 'vxe-table'
   const props = defineProps<{
     dataSource: Array<any>
@@ -73,7 +71,10 @@
     data,
     ...props.gridOtherOptions,
   })
-  const handlePageChange: VxePagerEvents.PageChange = ({ currentPage, pageSize }) => {
+  const handlePageChange: VxePagerEvents.PageChange = ({
+    currentPage,
+    pageSize,
+  }) => {
     const tablePage = {
       page: currentPage,
       size: pageSize,

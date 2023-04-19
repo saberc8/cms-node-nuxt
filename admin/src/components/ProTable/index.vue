@@ -1,6 +1,8 @@
 <template>
-  <a-card><ProForm :searchForm="searchForm" @search-data="searchData" /></a-card>
-  <a-card class="margin-top-10">
+  <el-card
+    ><ProForm :searchForm="searchForm" @search-data="searchData"
+  /></el-card>
+  <el-card class="table-body">
     <ProBody
       ref="proBody"
       :columns="columns"
@@ -17,7 +19,7 @@
         <slot name="toolbar_title"></slot>
       </template>
     </ProBody>
-  </a-card>
+  </el-card>
 </template>
 
 <script lang="ts" setup>
@@ -41,7 +43,7 @@
   let total = ref(0)
   const renderTable = (func: Function, params: Object) => {
     console.log(params, 'params2')
-    func(params).then((res) => {
+    func(params).then((res: any) => {
       console.log(res, '---')
       data.value = res.list
       total.value = res.total
@@ -54,7 +56,7 @@
     console.log(proBody, 'proBody')
     renderTable(props.getListFunc, props.params)
   }
-  const pageChange = (e) => {
+  const pageChange = (e: any) => {
     console.log(e, 'son-page-change')
     // eslint-disable-next-line vue/no-mutating-props
     // props.params.page = e.page
@@ -68,7 +70,7 @@
     searchData(e)
   }
 
-  const searchData = (e) => {
+  const searchData = (e: any) => {
     console.log('e', e, 'searchData')
 
     searchParams = e
@@ -85,8 +87,9 @@
   })
 </script>
 
-<style lang="less" scoped>
-  .margin-top-10 {
+<style lang="scss" scoped>
+  .table-body {
     margin-top: 10px;
+    min-width: 700px;
   }
 </style>

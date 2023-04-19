@@ -1,108 +1,95 @@
-import type { UserConfig, ConfigEnv } from 'vite'
-import pkg from './package.json'
-import dayjs from 'dayjs'
-import { loadEnv } from 'vite'
+import { UserConfigExport, ConfigEnv, loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+import {
+  createStyleImportPlugin,
+  VxeTableResolve,
+} from 'vite-plugin-style-import'
+
 import { resolve } from 'path'
-import { createProxy } from './build/vite/proxy'
-import { wrapperEnv } from './build/utils'
-import { createVitePlugins } from './build/vite/plugin'
-import { OUTPUT_DIR } from './build/constant'
+/** 当前执行node命令时文件夹的地址（工作目录） */
+const root: string = process.cwd()
 
-function pathResolve(dir: string) {
-  return resolve(process.cwd(), '.', dir)
+/** 路径查找 */
+const pathResolve = (dir: string): string => {
+  return resolve(__dirname, dir)
 }
 
-const { dependencies, devDependencies, name, version } = pkg
-const __APP_INFO__ = {
-  pkg: { dependencies, devDependencies, name, version },
-  lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-}
-
-export default ({ command, mode }: ConfigEnv): UserConfig => {
-  const root = process.cwd()
-
+export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const env = loadEnv(mode, root)
-
-  // The boolean type read by loadEnv is a string. This function can be converted to boolean type
-  const viteEnv = wrapperEnv(env)
-
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv
-
+  const { VITE_PORT, VITE_BASE_URL, VITE_API_URL } = env
   const isBuild = command === 'build'
-
+  console.log(env, isBuild)
   return {
-    base: VITE_PUBLIC_PATH,
+    plugins: [
+      vue(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+        // dts: 'src/auto-imports.d.ts', // 可以自定义文件生成的位置，默认是根目录下
+        imports: [
+          // 插件预设支持导入的api
+          'vue',
+          'vue-router',
+          'pinia',
+        ],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver(
+          {
+            importStyle: 'sass',
+            directives: true,
+          }
+        )],
+      }),
+      createStyleImportPlugin({
+        resolves: [VxeTableResolve()],
+      }),
+    ],
+    base: VITE_BASE_URL,
     root,
     resolve: {
-      alias: [
-        // /@/xxxx => src/xxxx
-        {
-          find: /@\//,
-          replacement: pathResolve('src') + '/',
-        },
-        // /#/xxxx => types/xxxx
-        {
-          find: /\/#\//,
-          replacement: pathResolve('types') + '/',
-        },
-      ],
+      alias: {
+        '@': pathResolve('src'),
+      },
     },
-    server: {
-      https: true,
-      // Listening on all local IPs
-      host: true,
-      port: VITE_PORT,
-      // Load proxy configuration from .env
-      proxy: createProxy(VITE_PROXY),
-    },
-    esbuild: {
-      pure: VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],
-    },
-    build: {
-      target: 'es2015',
-      cssTarget: 'chrome80',
-      outDir: OUTPUT_DIR,
-      // minify: 'terser',
-      /**
-       * 当 minify=“minify:'terser'” 解开注释
-       * Uncomment when minify="minify:'terser'"
-       */
-      // terserOptions: {
-      //   compress: {
-      //     keep_infinity: true,
-      //     drop_console: VITE_DROP_CONSOLE,
-      //   },
-      // },
-      // Turning off brotliSize display can slightly reduce packaging time
-      brotliSize: false,
-      chunkSizeWarningLimit: 2000,
-    },
-    define: {
-      // setting vue-i18-next
-      // Suppress warning
-      __INTLIFY_PROD_DEVTOOLS__: false,
-      __APP_INFO__: JSON.stringify(__APP_INFO__),
-    },
-    // 全局启用less引入后生效
     css: {
       preprocessorOptions: {
-        less: {
-          modifyVars: {
-            'primary-color': '#1677ff',
-            'link-color': '#1677ff',
-            'border-radius-base': '4px',
-          },
-          javascriptEnabled: true,
+        scss: {
+          additionalData: `@use "@/style/element.scss" as *;`,
         },
       },
     },
-
-    // The vite plugin used by the project. The quantity is large, so it is separately extracted and managed
-    plugins: createVitePlugins(viteEnv, isBuild),
-
-    optimizeDeps: {
-      // @iconify/iconify: The dependency is dynamically and virtually loaded by @purge-icons/generated, so it needs to be specified explicitly
-      include: ['@vue/runtime-core', '@vue/shared', '@iconify/iconify'],
+    server: {
+      https: false,
+      host: true,
+      port: VITE_PORT as unknown as number,
+      proxy: {
+        '/api': {
+          target: VITE_API_URL,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
+    build: {
+      sourcemap: false,
+      // 消除打包大小超过500kb警告
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        input: {
+          index: pathResolve("index.html")
+        },
+        // 静态资源分类打包
+        output: {
+          chunkFileNames: "static/js/[name]-[hash].js",
+          entryFileNames: "static/js/[name]-[hash].js",
+          assetFileNames: "static/[ext]/[name]-[hash].[ext]"
+        }
+      }
     },
   }
 }

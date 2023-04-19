@@ -1,22 +1,30 @@
-<h1>Vue nest admin</h1>
-## Git 贡献提交规范
+## 轻度封装的 vue3 admin 快速启动模版（开发中）
 
-- 参考 [vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md) 规范 ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
+### 分支
 
-  - `feat` 增加新功能
-  - `fix` 修复问题/BUG
-  - `style` 代码风格相关无影响运行结果的
-  - `perf` 优化/性能提升
-  - `refactor` 重构
-  - `revert` 撤销修改
-  - `test` 测试相关
-  - `docs` 文档/注释
-  - `chore` 依赖更新/脚手架配置修改等
-  - `workflow` 工作流改进
-  - `ci` 持续集成
-  - `types` 类型定义文件更改
-  - `wip` 开发中
+- main: 主分支
+- thin: 精简版启动模版
 
-## ProTable 组件
+### 包
 
-跳转到 [ProTable](./doucument.pro_table.md)
+element-plus  
+vue3  
+pinia  
+vxe-table
+
+### 设计思想
+
+如何减少一个开发者使用一个二次封装的代码的心智负担是主要考虑的问题。首先保证一个良好的文档示例。代码结构足够清晰，符合主流设计规范。保证必要功能的完整性，如鉴权，权限颗粒度细分。对于非必要功能开发直接舍弃，如国际化，第三方图标库的引入等。针对特殊的需求，如移动端适配，让用户在手机上以缩放形式操作即可，保证页面的不变形，内容不交错。  
+设想无论是element-plus还是antdv，naive, 都可以通过本套模版快速启动，只需要修改一些配置即可，如组件前缀等。  
+
+### 主要工作
+文档编写  
+基于 vxe-table 封装 table 组件，实现快速开发，解决后台代码占比最多的 table 页面，这个也是本系统唯一封装的组件。  
+
+### 一些说明
+
+并未引入原子 css 库，如需使用，可自行引入  
+根据开发经验几乎不会使用到第三方 icon 库，如需使用，可自行引入  
+未使用国际化，如需使用，可自行引入  
+未使用动态主题，如需使用，可自行开发  
+未支持动态布局，如需使用，可自行开发

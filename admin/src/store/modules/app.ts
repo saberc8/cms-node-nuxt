@@ -1,74 +1,39 @@
-import type { ProjectConfig, MenuSetting, TransitionSetting, MultiTabsSetting } from '/#/config'
-
 import { defineStore } from 'pinia'
 import { store } from '@/store'
-import { PROJ_CFG_KEY } from '@/enums/cacheEnum'
-import { Persistent } from '@/utils/cache/persistent'
-import { resetRouter } from '@/router'
-import { deepMerge } from '@/utils'
-
-interface AppState {
-  // Page loading status
-  pageLoading: boolean
-  // project config
-  projectConfig: ProjectConfig | null
-}
-let timeId: TimeoutHandle
+import { IAppType, IRobotAccount } from '../types'
+import { robotAccount } from '@/constants'
 export const useAppStore = defineStore({
   id: 'app',
-  state: (): AppState => ({
-    pageLoading: false,
-    projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
+  state: (): IAppType => ({
+    collapse: false,
+    robotAccount,
+    currentRobotAccount: JSON.parse(localStorage.getItem('robotAccount')) || robotAccount[0]
   }),
   getters: {
-    getPageLoading(): boolean {
-      return this.pageLoading
+    getCollapse(): boolean {
+      return this.collapse
     },
-
-    getProjectConfig(): ProjectConfig {
-      return this.projectConfig || ({} as ProjectConfig)
+    getRobotAccount(): IRobotAccount[] {
+      return this.robotAccount
     },
-
-    getMenuSetting(): MenuSetting {
-      return this.getProjectConfig.menuSetting
-    },
-    getTransitionSetting(): TransitionSetting {
-      return this.getProjectConfig.transitionSetting
-    },
-    getMultiTabsSetting(): MultiTabsSetting {
-      return this.getProjectConfig.multiTabsSetting
-    },
+    getCurrentRobotAccount(): IRobotAccount {
+      return this.currentRobotAccount
+    }
   },
   actions: {
-    setPageLoading(loading: boolean): void {
-      this.pageLoading = loading
+    setCollapse(e: boolean) {
+      this.collapse = e
     },
-
-    setProjectConfig(config: DeepPartial<ProjectConfig>): void {
-      this.projectConfig = deepMerge(this.projectConfig || {}, config)
-      Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig)
+    setRobotAccount(e: IRobotAccount[]) {
+      this.robotAccount = e
     },
-
-    async resetAllState() {
-      resetRouter()
-      Persistent.clearAll()
-    },
-    async setPageLoadingAction(loading: boolean): Promise<void> {
-      if (loading) {
-        clearTimeout(timeId)
-        // Prevent flicker
-        timeId = setTimeout(() => {
-          this.setPageLoading(loading)
-        }, 50)
-      } else {
-        this.setPageLoading(loading)
-        clearTimeout(timeId)
-      }
-    },
+    setCurrentRobotAccount(e: IRobotAccount) {
+      localStorage.setItem('robotAccount', JSON.stringify(e))
+      this.currentRobotAccount = e
+    }
   },
 })
 
-// Need to be used outside the setup
-export function useAppStoreWithOut() {
+export function useAppStoreHook() {
   return useAppStore(store)
 }
