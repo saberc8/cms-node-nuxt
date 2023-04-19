@@ -10,7 +10,7 @@ import { setupGlobDirectives } from '@/directives'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.less'
 
-import VXETable from 'vxe-table'
+// import VXETable from 'vxe-table'
 import XEUtils from 'xe-utils'
 import {
   // 全局对象

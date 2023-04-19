@@ -7,7 +7,6 @@ const apiUrl = import.meta.env.VITE_API_URL
 export const fetchConfig = {
   baseURL: `${apiUrl}api/`,
   headers: {
-    'appid': 'bd9d01ecc75dbbaaefce',
     'Content-Type': 'application/json',
   },
 }
@@ -65,6 +64,7 @@ interface BaseResponse<T> {
   msg: string;
   data: T
 }
+
 // GET请求
 export function useHttpGet<T>(key: string, url: string, options: UseFetchOptions  = {}): Promise<T> {
   options.method = 'GET'

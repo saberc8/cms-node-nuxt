@@ -1,4 +1,4 @@
-PORT: 2023
+PORT: 2223
 PREFIX: api
 
 # token过期时间为7天
@@ -9,9 +9,9 @@ datasource:
   driverName: mysql
   host: localhost
   port: 3306
-  database: nestjs-rbac
+  database: cms-node
   username: root
-  password: 123456
+  password: junmoxiao1122
   charset: utf8mb4
   loc: Asia/Shanghai
   logging: true
@@ -19,7 +19,7 @@ datasource:
 # 初始化数据
 user:
   username: admin
-  password: 123456
+  password: '123456'
   nickname: 系统管理员
 
 # jwt 配置

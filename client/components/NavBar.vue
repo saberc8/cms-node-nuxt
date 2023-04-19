@@ -7,9 +7,36 @@ const title = ref('navbar')
 </script>
 
 <style lang="scss" scoped>
-/* pc width > 1024px */
+/* pc width > 1024px */ // 1024       1280          1366      1440       1680       1920 
 .navbar {
 	background-color: yellow;
+}
+
+/* macbook */
+@media screen and (max-width: 1680px) {
+	.navbar {
+		background-color: #0055ff;
+	}
+}
+
+/* macbook */
+@media screen and (max-width: 1440px) {
+	.navbar {
+		background-color: #4670c3;
+	}
+}
+
+/* ipad pro */
+@media screen and (max-width: 1366px) {
+	.navbar {
+		background-color: #3b8f77;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	.navbar {
+		background-color: #bd7145;
+	}
 }
 
 /* ipad pro */

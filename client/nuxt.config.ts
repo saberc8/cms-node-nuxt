@@ -61,5 +61,6 @@ export default defineNuxtConfig({
         },
       },
     },
+		assetsInclude: ['**/*.glb'],
   },
 })
