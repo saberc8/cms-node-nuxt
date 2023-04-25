@@ -5,7 +5,7 @@ const request = createAxios({
 })
 
 export const userLogin = (data: IUserLogin): Promise<any> =>
-  request.post('login', data)
+  request.post('user/login', data)
 
 export const getUserList = (params: any): Promise<any> =>
   request.get('user/list', { params })

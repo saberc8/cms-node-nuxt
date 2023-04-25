@@ -2,11 +2,10 @@
   <div class="header">
     <div>
       <el-icon v-show="collapse" @click="changeCollapse"><Expand /></el-icon>
-      <el-icon v-show="!collapse" @click="changeCollapse"><Fold /></el-icon>
+      <el-icon v-show="collapse" @click="changeCollapse"><Fold /></el-icon>
     </div>
     <div class="right">
       <el-space>
-        <RobotAccount></RobotAccount>
         <el-dropdown>
           <span class="el-dropdown-link"> <Avatar></Avatar></span>
           <template #dropdown>
@@ -25,7 +24,6 @@
   import { Expand, Fold } from '@element-plus/icons-vue'
   import { removeToken } from '@/utils/auth'
   import { useAppStoreHook } from '@/store/modules/app'
-  import RobotAccount from './components/RobotAccount.vue'
   const useAppStore = useAppStoreHook()
   const collapse = computed(() => useAppStore.getCollapse)
   const router = useRouter()

@@ -24,6 +24,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { ElMessage } from 'element-plus'
   const props = defineProps<{
     visible: boolean
     title: string
@@ -32,25 +33,35 @@
     formFunc: any
   }>()
   const emit = defineEmits(['close'])
-  console.log(props)
   const dialogFormVisible = ref(props.visible)
   const formLabelWidth = '140px'
-  let form = reactive<any>(props.formData)
+  let form = ref<any>()
   watch(
     () => props.visible,
     (val) => {
       dialogFormVisible.value = val
-      form = props.formData
+      form.value = JSON.parse(JSON.stringify(props.formData))
     },
   )
 
-  const confirmEvent = async () => {
-    const res = await props.formFunc(form)
-    console.log(res, 'confirmEvent')
-  }
+  // const show = computed({
+  //   get() {
+  //     return props.value
+  //   },
+  //   set(val: boolean) {
+  //     emit('update:value', val)
+  //   },
+  // })
 
   const close = () => {
     emit('close', false)
+  }
+
+  const confirmEvent = async () => {
+    const res = await props.formFunc(form.value)
+    console.log(res, 'confirmEvent')
+    ElMessage.success(res)
+    emit('close', true)
   }
 </script>
 <style lang="scss" scoped></style>
