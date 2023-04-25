@@ -1,14 +1,15 @@
 import { SharedEntity } from '@src/shared/entities/base.entity'
 
-import { Entity, Column, Index } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('column')
 export class ColumnEntity extends SharedEntity {
   constructor() {
     super()
   }
+  @PrimaryGeneratedColumn()
+  id: number
 
-  @Index()
   @Column({
     type: 'varchar',
     length: 50,
