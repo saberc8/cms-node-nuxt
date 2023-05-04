@@ -2,9 +2,6 @@
   <main>
     <NavBar />
     <slot />
-    <Footer />
-    <div>
-      [Default Layout]
-    </div>
+    <div>[Default Layout]</div>
   </main>
 </template>

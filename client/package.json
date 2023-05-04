@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "element-plus": "^2.3.1",
+    "ohash": "^1.1.2",
     "sass": "^1.60.0",
     "three": "^0.151.3"
   }

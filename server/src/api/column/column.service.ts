@@ -44,11 +44,13 @@ export class ColumnService {
       skip: (page - 1) * size,
       take: size,
     })
+    console.log(result)
     return Object.assign({ total: result[1] }, { list: result[0] })
   }
 
   async getAllColumnList() {
     const result = await this.columnEntity.find()
+    console.log(result)
     return result
   }
 

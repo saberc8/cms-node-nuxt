@@ -12,7 +12,6 @@ import { plainToClass } from 'class-transformer'
 @Injectable()
 export class ValidationPipe implements PipeTransform<any> {
   async transform(value: any, metadata: ArgumentMetadata) {
-    console.log(value, metadata, 'vm')
     const { metatype } = metadata
     // 如果没有传入验证规则，则不验证，直接返回数据
     if (!metatype || !this.toValidate(metatype)) {
@@ -26,7 +25,7 @@ export class ValidationPipe implements PipeTransform<any> {
       // 统一抛出异常
       throw new HttpException({ message: msg }, HttpStatus.OK)
     } else {
-      Logger.log(errors, 'ValidationPipe中错误')
+      // Logger.log(errors, 'ValidationPipe中错误')
     }
     return value
   }

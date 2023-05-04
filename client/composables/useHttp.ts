@@ -1,6 +1,5 @@
 import { ElMessage } from 'element-plus'
 import { hash } from 'ohash'
-import { App_Id } from '~~/config'
 
 const apiUrl = import.meta.env.VITE_API_URL
 
@@ -13,11 +12,9 @@ export const fetchConfig = {
 
 // 请求体封装
 function useGetFetchOptions(options: any = {}) {
-  const source = { appId: App_Id }
-
   options.baseURL = options.baseURL ?? fetchConfig.baseURL
-  options.params && Object.assign(options.params, source)
-  options.body && Object.assign(options.body, source)
+  options.params && Object.assign(options.params)
+  options.body && Object.assign(options.body)
   options.server = true
 
   return options
@@ -33,10 +30,19 @@ export async function useHttp(key: string, url: string, options: any = {}) {
 
   return await $fetch(url, options)
     .then((res: any) => {
-      return { ...res.data, error }
+      // 这里修改自定义的返回数据
+      if (res.code === 0) {
+        return res.result
+      } else {
+        error.value = res.msg
+        if (process.client) {
+          ElMessage.error(res.msg || '服务端错误')
+        }
+        return { error }
+      }
     })
     .catch((err) => {
-      const msg = err?.data?.data
+      const msg = err
       if (process.client) {
         ElMessage.error(msg || '服务端错误')
       }
@@ -52,7 +58,7 @@ type UseFetchOptions = {
   query?: SearchParams
   params?: Omit<SearchParams, 'prototype'>
   body?: RequestInit['body'] | Record<string, any>
-  headers?: { key: string, value: string }[]
+  headers?: { key: string; value: string }[]
   baseURL?: string
   server?: boolean
   lazy?: boolean
@@ -60,19 +66,27 @@ type UseFetchOptions = {
   pick?: string[]
 }
 interface BaseResponse<T> {
-  code: 0 | 1 | 400 | 401 | 403 | 500 | 502;
-  msg: string;
+  code: 0 | 1 | 400 | 401 | 403 | 500 | 502
+  msg: string
   data: T
 }
 
 // GET请求
-export function useHttpGet<T>(key: string, url: string, options: UseFetchOptions  = {}): Promise<T> {
+export function useHttpGet<T>(
+  key: string,
+  url: string,
+  options: UseFetchOptions = {},
+): Promise<T> {
   options.method = 'GET'
   return useHttp(key, url, options)
 }
 
 // POST请求
-export function useHttpPost<T>(key: string, url: string, options: UseFetchOptions = {}): Promise<T> {
+export function useHttpPost<T>(
+  key: string,
+  url: string,
+  options: UseFetchOptions = {},
+): Promise<T> {
   options.method = 'POST'
   return useHttp(key, url, options)
 }
