@@ -22,12 +22,11 @@
     const data: any = await useAsyncData('use_ColumnList', () =>
       useColumnList(params),
     )
-
-    console.log(1)
     set(columnList, data.data.value.list)
   }
-
-  getColumnList()
+  onMounted(() => {
+    getColumnList()
+  })
 </script>
 
 <style lang="scss" scoped>

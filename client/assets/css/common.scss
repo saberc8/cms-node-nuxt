@@ -78,7 +78,6 @@ svg {
 }
 :-ms-input-placeholder {
   /* Internet Explorer 10+ */
-
   font-size: 1rem;
 }
 ::-webkit-scrollbar {
@@ -104,26 +103,7 @@ svg {
 .none {
   display: none !important;
 }
-#nprogress .bar {
-  height: 2.5px !important; //进度条高度
-  background: rgba(255, 0, 0, 0.66) !important; //自定义颜色
-}
 :root {
+	--theme-color: #42b883;
   --el-color-primary: #42b883;
-}
-.rotate-svg {
-  color: var(--el-color-primary);
-  svg,
-  img {
-    position: relative;
-    top: -2px;
-    transition: all 0.6s;
-  }
-  &:hover {
-    color: var(--theme-orange);
-    svg,
-    img {
-      transform: rotate(-360deg);
-    }
-  }
 }

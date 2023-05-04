@@ -4,12 +4,8 @@ interface PageRequestParam {
 }
 
 interface PageResult<T> {
-  rows: T[]
-  page?: {
-    limit: number
-    page: number
-    total: number
-  }
+  list: T[]
+  total: number
 }
 
 interface ColumnItem {
