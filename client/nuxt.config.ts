@@ -51,7 +51,7 @@ export default defineNuxtConfig({
 	pwa,
 	devServer: {
 		https: false,
-		port: 2224,
+		port: 3002,
 	},
   vite: {
     css: {

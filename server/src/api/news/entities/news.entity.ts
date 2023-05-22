@@ -8,7 +8,7 @@ export class NewsEntity extends SharedEntity {
     super()
   }
   // q: Column 非必填如何写配置
-  // a: 
+  // a:
   @Index()
   @Column({
     type: 'varchar',
@@ -27,6 +27,15 @@ export class NewsEntity extends SharedEntity {
     comment: '副标题',
   })
   subtitle!: string
+
+  // 所属栏目id
+  @Column({
+    type: 'tinyint',
+    name: 'column_id',
+    comment: '所属栏目id',
+    default: 1,
+  })
+  columnId!: number
 
   // 描述
   @Column({

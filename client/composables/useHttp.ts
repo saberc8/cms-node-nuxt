@@ -47,7 +47,6 @@ export async function useHttp(key: string, url: string, options: any = {}) {
         ElMessage.error(msg || '服务端错误')
       }
       error.value = msg
-
       return { error }
     })
 }

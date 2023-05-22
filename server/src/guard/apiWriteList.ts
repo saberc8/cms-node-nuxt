@@ -4,6 +4,9 @@ const apiWriteList: string[] = [
   '/api/user/add',
   '/api/user/initDatabase',
   '/api/column/list',
+  '/api/news/list',
+  '/api/news/detail',
+  '/api/banner/list'
 ]
 
 export default apiWriteList

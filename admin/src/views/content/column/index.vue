@@ -58,6 +58,24 @@
       type: 'input',
       placeholder: '请输入栏目key',
     },
+    {
+      field: 'path',
+      label: 'path',
+      type: 'input',
+      placeholder: '请输入path',
+    },
+    {
+      field: 'pid',
+      label: 'pid',
+      type: 'input',
+      placeholder: '请输入path',
+    },
+    {
+      field: 'img',
+      label: 'img',
+      type: 'input',
+      placeholder: '请输入img',
+    },
   ]
   const columns: VxeGridPropTypes.Columns = [
     {
@@ -66,8 +84,10 @@
       treeNode: false, // 开启树图表
     },
     { field: 'id', title: 'ID', width: 80 },
+    { field: 'pid', title: 'PID', width: 180 },
     { field: 'name', title: '栏目名', width: 180 },
     { field: 'key', title: '栏目key', width: 180 },
+    { field: 'path', title: 'path', width: 180 },
     {
       field: 'createdAt',
       title: '创建时间',

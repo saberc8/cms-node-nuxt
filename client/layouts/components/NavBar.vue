@@ -1,11 +1,13 @@
 <template>
   <div class="navbar">
     <Logo></Logo>
-    <div class="content">
-      <span v-for="item in columnList" :key="item.id">
-        {{ item.name }}
-      </span>
-    </div>
+    <ClientOnly>
+      <div class="content">
+        <span v-for="item in columnList" :key="item.id">
+          {{ item.name }}
+        </span>
+      </div>
+    </ClientOnly>
   </div>
 </template>
 
@@ -22,10 +24,11 @@
     const data: any = await useAsyncData('use_ColumnList', () =>
       useColumnList(params),
     )
+    console.log(data, 'data colomn')
     set(columnList, data.data.value.list)
   }
+  getColumnList()
   onMounted(() => {
-    getColumnList()
   })
 </script>
 

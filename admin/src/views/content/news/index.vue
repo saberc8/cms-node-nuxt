@@ -51,6 +51,18 @@
       type: 'input',
       placeholder: '请输入新闻名',
     },
+    {
+      field: 'content',
+      label: '新闻内容',
+      type: 'input',
+      placeholder: '请输入新闻内容',
+    },
+    {
+      field: 'subtitle',
+      label: '副标题',
+      type: 'input',
+      placeholder: '请输入',
+    },
   ]
   const news: VxeGridPropTypes.Columns = [
     {
@@ -60,6 +72,8 @@
     },
     { field: 'id', title: 'ID', width: 80 },
     { field: 'title', title: '标题', width: 180 },
+    { field: 'subtitle', title: '副标题', width: 180 },
+    { field: 'content', title: 'content', width: 180 },
     {
       field: 'createdAt',
       title: '创建时间',

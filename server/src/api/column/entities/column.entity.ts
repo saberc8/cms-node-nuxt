@@ -25,4 +25,29 @@ export class ColumnEntity extends SharedEntity {
     comment: 'key',
   })
   key!: string
+
+  @Column({
+    type: 'int',
+    name: 'pid',
+    default: '0',
+    comment: '父级菜单id',
+  })
+  pid!: number
+
+  @Column({
+    type: 'varchar',
+    length: 50,
+    name: 'path',
+    comment: '栏目路径',
+  })
+  path!: string
+
+  @Column({
+    type: 'varchar',
+    length: 50,
+    name: 'img',
+    default: '',
+    comment: '图片',
+  })
+  img: string
 }

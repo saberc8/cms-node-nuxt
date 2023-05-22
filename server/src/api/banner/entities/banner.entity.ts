@@ -48,11 +48,21 @@ export class BannerEntity extends SharedEntity {
   @Column({
     type: 'varchar',
     length: 50,
-    name: 'url',
+    name: 'cover_url',
     default: '',
     comment: '封面',
   })
-  url!: string
+  cover_url!: string
+
+  // link
+  @Column({
+    type: 'varchar',
+    length: 50,
+    name: 'link_url',
+    default: '',
+    comment: '封面',
+  })
+  link_url!: string
 
   @Column({
     type: 'varchar',
