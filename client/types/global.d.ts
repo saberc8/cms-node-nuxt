@@ -1,3 +1,4 @@
+declare module 'locomotive-scroll'
 interface PageRequestParam {
   page: number
   size: number

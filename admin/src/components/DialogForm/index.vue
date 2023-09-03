@@ -14,6 +14,7 @@
         />
       </el-form-item>
     </el-form>
+    <ZEditor></ZEditor>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -25,6 +26,7 @@
 
 <script lang="ts" setup>
   import { ElMessage } from 'element-plus'
+  import ZEditor from './components/ZEditor.vue'
   const props = defineProps<{
     visible: boolean
     title: string
